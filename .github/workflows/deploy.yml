@@ -1,4 +1,4 @@
-"""
+
 name: Deploy to GitHub Pages
 
 on:
@@ -11,7 +11,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
+        with:
+          lfs: true
+
+      - name: Install Git LFS
+        run: |
+          git lfs install
+          git lfs pull
 
       - name: Install and Build
         run: |
@@ -23,4 +30,3 @@ jobs:
         with:
           branch: gh-pages
           folder: .next
-""
