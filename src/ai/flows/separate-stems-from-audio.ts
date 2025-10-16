@@ -9,6 +9,7 @@
 
 import {ai} from '@/ai/genkit';
 import {z} from 'genkit';
+import {googleAI} from '@genkit-ai/google-genai';
 
 const SeparateStemsFromAudioInputSchema = z.object({
   audioDataUri: z
@@ -40,6 +41,7 @@ const prompt = ai.definePrompt({
   prompt: `You are an AI audio processing expert. Separate the audio file into vocals and instrumental stems.
 
 Audio: {{media url=audioDataUri}}`,
+  model: googleAI('gemini-2.5-flash-audio-preview'),
 });
 
 const separateStemsFromAudioFlow = ai.defineFlow(
